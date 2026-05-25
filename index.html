@@ -13,8 +13,6 @@
   --c4: rgba(255,26,26,0.18);
   --orange: #ff6600;
   --bg: #0d0303;
-  --bg2: #160606;
-  --bg3: #1a0808;
   --white: #f8eaea;
   --muted: rgba(240,200,200,0.45);
   --border: rgba(255,26,26,0.2);
@@ -32,374 +30,212 @@ body {
   font-family: var(--sans);
   line-height: 1.6;
   overflow-x: hidden;
+  cursor: auto;
+  position: relative;
 }
 
-/* ── Background grid pattern (CSS-only, no canvas) ── */
 body::before {
   content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 0;
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
   background-image:
-    linear-gradient(rgba(255,26,26,0.055) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,26,26,0.055) 1px, transparent 1px);
+    linear-gradient(rgba(255,26,26,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,26,26,0.06) 1px, transparent 1px);
   background-size: 72px 72px;
-  pointer-events: none;
+  opacity: 0.9;
 }
 
-/* ── Animated horizontal scan lines (CSS-only) ── */
 body::after {
   content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 0;
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
   background:
-    linear-gradient(180deg,
-      transparent 0%,
-      transparent 24%,
-      rgba(255,26,26,0.045) 25%,
-      transparent 26%,
-      transparent 49%,
-      rgba(255,26,26,0.035) 50%,
-      transparent 51%,
-      transparent 74%,
-      rgba(255,26,26,0.045) 75%,
-      transparent 76%
-    );
-  animation: scanlines 12s ease-in-out infinite alternate;
-  pointer-events: none;
-}
-@keyframes scanlines {
-  0%   { transform: translateY(-8%); opacity: 0.5; }
-  100% { transform: translateY(8%);  opacity: 1;   }
+    radial-gradient(ellipse 80% 1px at 50% 25%, rgba(255,26,26,0.07) 0%, transparent 100%),
+    radial-gradient(ellipse 80% 1px at 50% 50%, rgba(255,26,26,0.07) 0%, transparent 100%),
+    radial-gradient(ellipse 80% 1px at 50% 75%, rgba(255,26,26,0.07) 0%, transparent 100%);
 }
 
 /* ── HEADER ── */
 header {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; justify-content: space-between; align-items: center;
-  padding: 0 56px;
-  height: 64px;
-  background: rgba(13,3,3,0.85);
+  padding: 0 56px; height: 64px;
+  background: rgba(13,3,3,0.9);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
 }
-
 .logo {
-  font-family: var(--mono);
-  font-size: 0.82rem;
-  letter-spacing: 0.18em;
-  color: var(--c);
+  font-family: var(--mono); font-size: 0.82rem;
+  letter-spacing: 0.18em; color: var(--c);
   display: flex; align-items: center; gap: 10px;
 }
 .logo-diamond {
-  width: 8px; height: 8px;
-  background: var(--c);
-  transform: rotate(45deg);
-  box-shadow: 0 0 8px var(--c);
-  flex-shrink: 0;
-  animation: pulse-diamond 2.5s ease-in-out infinite;
+  width: 8px; height: 8px; background: var(--c);
+  transform: rotate(45deg); box-shadow: 0 0 8px var(--c); flex-shrink: 0;
 }
-@keyframes pulse-diamond {
-  0%,100% { box-shadow: 0 0 8px var(--c); }
-  50%      { box-shadow: 0 0 18px var(--c), 0 0 32px rgba(255,26,26,0.4); }
-}
-
 nav { display: flex; gap: 32px; list-style: none; }
 nav a {
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.15em;
-  color: var(--muted);
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: color 0.2s;
-  position: relative;
+  font-family: var(--mono); font-size: 0.72rem;
+  letter-spacing: 0.15em; color: var(--muted);
+  text-decoration: none; text-transform: uppercase;
+  transition: color 0.2s; position: relative;
 }
 nav a::after {
-  content: '';
-  position: absolute; bottom: -4px; left: 0; right: 0;
+  content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
   height: 1px; background: var(--c);
-  transform: scaleX(0); transform-origin: left;
-  transition: transform 0.25s ease;
+  transform: scaleX(0); transform-origin: left; transition: transform 0.25s ease;
 }
 nav a:hover { color: var(--c); }
 nav a:hover::after { transform: scaleX(1); }
-
 .nav-cta {
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  color: var(--bg);
-  background: var(--c);
-  padding: 8px 20px;
-  text-decoration: none;
-  text-transform: uppercase;
+  font-family: var(--mono); font-size: 0.72rem;
+  letter-spacing: 0.12em; color: var(--bg); background: var(--c);
+  padding: 8px 20px; text-decoration: none; text-transform: uppercase;
   clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
   transition: background 0.2s, box-shadow 0.2s;
 }
-.nav-cta:hover {
-  background: #fff;
-  box-shadow: 0 0 20px rgba(255,26,26,0.6);
-}
+.nav-cta:hover { background: #fff; box-shadow: 0 0 20px rgba(255,26,26,0.6); }
 
 /* ── HERO ── */
 #hero {
-  position: relative; z-index: 1;
-  min-height: 100vh;
+  position: relative; z-index: 1; min-height: 100vh;
   display: flex; flex-direction: column;
   justify-content: center; align-items: flex-start;
-  padding: 120px 56px 80px;
-  overflow: hidden;
+  padding: 120px 56px 80px; overflow: hidden;
 }
-
 .hero-tag {
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.25em;
-  color: var(--orange);
-  margin-bottom: 28px;
+  font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.25em;
+  color: var(--orange); margin-bottom: 28px;
   display: flex; align-items: center; gap: 12px;
   animation: rise 0.7s 0.2s ease both;
 }
-.hero-tag::before {
-  content: ''; width: 32px; height: 1px; background: var(--orange);
-  box-shadow: 0 0 6px var(--orange);
-}
-
+.hero-tag::before { content: ''; width: 32px; height: 1px; background: var(--orange); box-shadow: 0 0 6px var(--orange); }
 .hero-title {
-  font-family: var(--sans);
-  font-size: clamp(3.5rem, 8vw, 7.5rem);
-  font-weight: 800;
-  line-height: 0.95;
-  letter-spacing: -0.02em;
-  color: var(--white);
-  margin-bottom: 12px;
+  font-family: var(--sans); font-size: clamp(3.5rem, 8vw, 7.5rem);
+  font-weight: 800; line-height: 0.95; letter-spacing: -0.02em;
+  color: var(--white); margin-bottom: 12px;
   animation: rise 0.8s 0.35s ease both;
 }
-.hero-title em {
-  font-style: normal;
-  color: var(--c);
-  text-shadow: 0 0 30px rgba(255,26,26,0.5), 0 0 60px rgba(255,26,26,0.2);
-}
-
+.hero-title em { font-style: normal; color: var(--c); text-shadow: 0 0 30px rgba(255,26,26,0.5), 0 0 60px rgba(255,26,26,0.2); }
 .hero-rule {
-  width: 100%; max-width: 560px;
-  height: 1px;
+  width: 100%; max-width: 560px; height: 1px;
   background: linear-gradient(90deg, var(--c), transparent);
-  margin: 28px 0;
-  animation: rise 0.6s 0.5s ease both;
+  margin: 28px 0; animation: rise 0.6s 0.5s ease both;
 }
-
 .hero-meta {
   display: flex; gap: 40px; flex-wrap: wrap;
-  margin-bottom: 48px;
-  animation: rise 0.7s 0.6s ease both;
+  margin-bottom: 48px; animation: rise 0.7s 0.6s ease both;
 }
 .hero-meta-item { display: flex; flex-direction: column; gap: 2px; }
-.hero-meta-label {
-  font-family: var(--mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
-  color: var(--muted);
-  text-transform: uppercase;
-}
-.hero-meta-val {
-  font-family: var(--mono);
-  font-size: 1.1rem;
-  color: var(--c);
-}
-
+.hero-meta-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.2em; color: var(--muted); text-transform: uppercase; }
+.hero-meta-val { font-family: var(--mono); font-size: 1.1rem; color: var(--c); }
 .hero-desc {
-  max-width: 500px;
-  font-size: 1rem;
-  font-weight: 300;
-  color: var(--muted);
-  line-height: 1.85;
-  margin-bottom: 52px;
+  max-width: 500px; font-size: 1rem; font-weight: 300;
+  color: var(--muted); line-height: 1.85; margin-bottom: 52px;
   animation: rise 0.7s 0.7s ease both;
 }
-
 .hero-actions {
   display: flex; gap: 16px; align-items: center;
-  animation: rise 0.7s 0.85s ease both;
+  margin-bottom: 56px; animation: rise 0.7s 0.85s ease both;
 }
 
+/* ── COUNTDOWN ── */
+.countdown-wrap {
+  display: flex; flex-direction: column; gap: 10px;
+  max-width: 560px; animation: rise 0.7s 1s ease both;
+}
+.countdown-label {
+  font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.25em;
+  color: var(--orange); text-transform: uppercase;
+  display: flex; align-items: center; gap: 8px;
+}
+.countdown-label::before {
+  content: ''; width: 6px; height: 6px; background: var(--orange); border-radius: 50%;
+  animation: blink 1.5s ease infinite;
+}
+.countdown-grid { display: flex; gap: 2px; }
+.cd-unit {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 16px 20px; border: 1px solid var(--border);
+  background: var(--c3); min-width: 80px; position: relative; overflow: hidden;
+}
+.cd-unit::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--c), transparent); opacity: 0.5;
+}
+.cd-unit:hover { border-color: var(--border-h); }
+.cd-num { font-family: var(--mono); font-size: 2rem; color: var(--c); text-shadow: 0 0 16px rgba(255,26,26,0.5); line-height: 1; margin-bottom: 4px; }
+.cd-lbl { font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.2em; color: var(--muted); text-transform: uppercase; }
+.cd-sep { display: flex; align-items: flex-start; padding: 14px 4px 0; font-family: var(--mono); font-size: 1.6rem; color: rgba(255,26,26,0.3); }
+
+.scroll-hint {
+  position: absolute; bottom: 36px; left: 56px;
+  font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.2em;
+  color: var(--muted); display: flex; align-items: center; gap: 10px;
+  animation: rise 0.6s 1.2s ease both;
+}
+.scroll-hint::before {
+  content: ''; width: 1px; height: 32px;
+  background: linear-gradient(180deg, transparent, var(--c));
+  animation: scrollPulse 2s ease infinite;
+}
+
+/* ── BUTTONS ── */
 .btn {
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  text-decoration: none;
-  padding: 14px 36px;
-  transition: all 0.2s;
-  display: inline-block;
+  font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.15em;
+  text-transform: uppercase; text-decoration: none;
+  padding: 14px 36px; transition: all 0.2s; display: inline-block;
 }
 .btn-fill {
-  background: var(--c);
-  color: var(--bg);
+  background: var(--c); color: var(--bg);
   clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
   box-shadow: 0 0 24px rgba(255,26,26,0.35);
 }
-.btn-fill:hover {
-  background: #fff;
-  box-shadow: 0 0 40px rgba(255,26,26,0.6);
-  transform: translateY(-2px);
-}
+.btn-fill:hover { background: #fff; box-shadow: 0 0 40px rgba(255,26,26,0.6); transform: translateY(-2px); }
 .btn-ghost {
-  border: 1px solid var(--border-h);
-  color: var(--c);
+  border: 1px solid var(--border-h); color: var(--c);
   clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
 }
 .btn-ghost:hover { background: var(--c3); border-color: var(--c); }
 
-.scroll-hint {
-  position: absolute; bottom: 36px; left: 56px;
-  font-family: var(--mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.2em;
-  color: var(--muted);
-  display: flex; align-items: center; gap: 10px;
-  animation: rise 0.6s 1.2s ease both;
-}
-.scroll-hint::before {
-  content: '';
-  width: 1px; height: 32px;
-  background: linear-gradient(180deg, transparent, var(--c));
-  animation: scrollPulse 2s ease infinite;
-}
-@keyframes scrollPulse { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
-
-.hero-panel {
-  position: absolute; right: 56px; top: 50%;
-  transform: translateY(-50%);
-  display: flex; flex-direction: column; gap: 2px;
-  animation: rise 0.8s 0.9s ease both;
-}
-.hero-stat-box {
-  width: 180px; padding: 20px;
-  border: 1px solid var(--border);
-  background: var(--c3);
-  position: relative;
-  transition: border-color 0.3s;
-}
-.hero-stat-box:hover { border-color: var(--border-h); }
-.hero-stat-box::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, var(--c), transparent);
-  opacity: 0; transition: opacity 0.3s;
-}
-.hero-stat-box:hover::before { opacity: 1; }
-.hsb-val {
-  font-family: var(--mono);
-  font-size: 1.6rem;
-  color: var(--c);
-  text-shadow: 0 0 12px rgba(255,26,26,0.4);
-  line-height: 1;
-  margin-bottom: 4px;
-}
-.hsb-label { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.1em; }
-
-/* ── SECTIONS ── */
-.section {
-  position: relative; z-index: 1;
-  padding: 96px 56px;
-  max-width: 1200px; margin: 0 auto;
-}
-
+/* ── LAYOUT ── */
+.section { position: relative; z-index: 1; padding: 96px 56px; max-width: 1200px; margin: 0 auto; }
 .sec-label {
-  font-family: var(--mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.3em;
-  color: var(--orange);
-  margin-bottom: 10px;
-  display: flex; align-items: center; gap: 10px;
+  font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.3em;
+  color: var(--orange); margin-bottom: 10px; display: flex; align-items: center; gap: 10px;
 }
 .sec-label::before { content: ''; width: 20px; height: 1px; background: var(--orange); }
-
-.sec-title {
-  font-family: var(--sans);
-  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-  font-weight: 700;
-  color: var(--white);
-  margin-bottom: 56px;
-  letter-spacing: -0.01em;
-}
+.sec-title { font-family: var(--sans); font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 700; color: var(--white); margin-bottom: 56px; letter-spacing: -0.01em; }
 .sec-title span { color: var(--c); }
-
-.divider {
-  position: relative; z-index: 1;
-  height: 1px;
-  background: linear-gradient(90deg, transparent 5%, var(--border) 30%, var(--border) 70%, transparent 95%);
-}
+.divider { position: relative; z-index: 1; height: 1px; background: linear-gradient(90deg, transparent 5%, var(--border) 30%, var(--border) 70%, transparent 95%); }
 
 /* ── ABOUT ── */
-.about-layout {
-  display: grid;
-  grid-template-columns: 1fr 380px;
-  gap: 64px;
-  align-items: start;
-}
+.about-layout { display: grid; grid-template-columns: 1fr 380px; gap: 64px; align-items: start; }
 .about-body { font-size: 1rem; font-weight: 300; color: var(--muted); line-height: 1.9; }
 .about-body p { margin-bottom: 18px; }
 .about-body strong { color: var(--white); font-weight: 600; }
-
 .info-panel { display: flex; flex-direction: column; gap: 1px; border: 1px solid var(--border); }
 .info-row { display: flex; border-bottom: 1px solid var(--border); background: var(--c3); transition: background 0.2s; }
 .info-row:last-child { border-bottom: none; }
-.info-row:hover { background: var(--c4); }
-.info-key {
-  width: 130px; flex-shrink: 0;
-  padding: 14px 16px;
-  font-family: var(--mono); font-size: 0.65rem;
-  letter-spacing: 0.15em; color: var(--muted);
-  text-transform: uppercase; border-right: 1px solid var(--border);
-}
+.info-row:hover { background: rgba(255,26,26,0.18); }
+.info-key { width: 130px; flex-shrink: 0; padding: 14px 16px; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; border-right: 1px solid var(--border); }
 .info-val { padding: 14px 16px; font-size: 0.88rem; color: var(--white); font-weight: 500; }
 .info-val.accent { color: var(--c); font-family: var(--mono); }
 
 /* ── TIMELINE ── */
 .timeline-wrap { display: flex; flex-direction: column; gap: 2px; }
-.tl-item {
-  display: grid;
-  grid-template-columns: 120px 1px 1fr;
-  gap: 0 28px;
-  align-items: start;
-}
-.tl-date {
-  font-family: var(--mono); font-size: 0.7rem;
-  color: var(--muted); letter-spacing: 0.1em;
-  padding-top: 20px; text-align: right; line-height: 1.4;
-}
+.tl-item { display: grid; grid-template-columns: 120px 1px 1fr; gap: 0 28px; align-items: start; animation: rise 0.5s ease both; }
+.tl-item:nth-child(1){animation-delay:0.05s} .tl-item:nth-child(2){animation-delay:0.1s}
+.tl-item:nth-child(3){animation-delay:0.15s} .tl-item:nth-child(4){animation-delay:0.2s}
+.tl-item:nth-child(5){animation-delay:0.25s} .tl-item:nth-child(6){animation-delay:0.3s}
+.tl-item:nth-child(7){animation-delay:0.35s}
+.tl-date { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; padding-top: 20px; text-align: right; line-height: 1.4; }
 .tl-line-wrap { display: flex; flex-direction: column; align-items: center; position: relative; }
-.tl-dot {
-  width: 10px; height: 10px;
-  background: var(--bg); border: 2px solid var(--c);
-  transform: rotate(45deg);
-  margin-top: 22px; flex-shrink: 0;
-  box-shadow: 0 0 8px rgba(255,26,26,0.4);
-  transition: background 0.3s; z-index: 1;
-}
+.tl-dot { width: 10px; height: 10px; background: var(--bg); border: 2px solid var(--c); transform: rotate(45deg); margin-top: 22px; flex-shrink: 0; box-shadow: 0 0 8px rgba(255,26,26,0.4); transition: background 0.3s; z-index: 1; }
 .tl-item:hover .tl-dot { background: var(--c); }
 .tl-connector { flex: 1; width: 1px; background: var(--border); margin-top: 4px; }
 .tl-last .tl-connector { display: none; }
-.tl-card {
-  padding: 20px 24px;
-  border: 1px solid var(--border);
-  background: var(--c3);
-  margin-bottom: 2px;
-  transition: border-color 0.25s, background 0.25s;
-  position: relative; overflow: hidden;
-}
-.tl-card:hover { border-color: var(--border-h); background: var(--c4); }
-.tl-card::after {
-  content: '';
-  position: absolute; left: 0; top: 0; bottom: 0;
-  width: 2px; background: var(--c);
-  opacity: 0; transition: opacity 0.25s;
-}
+.tl-card { padding: 20px 24px; border: 1px solid var(--border); background: var(--c3); margin-bottom: 2px; transition: border-color 0.25s, background 0.25s; position: relative; overflow: hidden; }
+.tl-card:hover { border-color: var(--border-h); background: rgba(255,26,26,0.18); }
+.tl-card::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--c); opacity: 0; transition: opacity 0.25s; }
 .tl-card:hover::after { opacity: 1; }
 .tl-phase { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.2em; color: var(--orange); margin-bottom: 4px; text-transform: uppercase; }
 .tl-phase.event { color: var(--c); }
@@ -408,22 +244,11 @@ nav a:hover::after { transform: scaleX(1); }
 
 /* ── PRIZES ── */
 .prizes-layout { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; margin-bottom: 2px; }
-.prize-card {
-  padding: 40px 28px;
-  border: 1px solid var(--border);
-  background: var(--c3);
-  text-align: center;
-  position: relative; overflow: hidden;
-  transition: border-color 0.3s;
-}
+.prize-card { padding: 40px 28px; border: 1px solid var(--border); background: var(--c3); text-align: center; position: relative; overflow: hidden; transition: border-color 0.3s; animation: rise 0.5s ease both; }
+.prize-card:nth-child(1){animation-delay:0.05s} .prize-card:nth-child(2){animation-delay:0.15s} .prize-card:nth-child(3){animation-delay:0.25s}
 .prize-card:hover { border-color: var(--border-h); }
 .prize-card.first { border-color: rgba(255,26,26,0.35); background: rgba(255,26,26,0.06); }
-.prize-shine {
-  position: absolute; top: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--c), transparent);
-  opacity: 0; transition: opacity 0.3s;
-}
+.prize-shine { position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--c), transparent); opacity: 0; transition: opacity 0.3s; }
 .prize-card:hover .prize-shine { opacity: 1; }
 .prize-card.first .prize-shine { opacity: 0.6; }
 .prize-pos { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.25em; color: var(--muted); margin-bottom: 20px; text-transform: uppercase; }
@@ -432,12 +257,6 @@ nav a:hover::after { transform: scaleX(1); }
 .prize-card.first .prize-cash { font-size: 2.6rem; }
 .prize-per { font-size: 0.75rem; color: var(--muted); margin-bottom: 20px; letter-spacing: 0.05em; }
 .prize-note { font-size: 0.78rem; color: var(--muted); border-top: 1px solid var(--border); padding-top: 16px; line-height: 1.6; }
-
-.consolation-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; }
-.con-card { padding: 18px 12px; border: 1px solid rgba(255,26,26,0.1); background: rgba(255,26,26,0.02); text-align: center; transition: border-color 0.25s, background 0.25s; }
-.con-card:hover { border-color: var(--border); background: var(--c3); }
-.con-amount { font-family: var(--mono); font-size: 0.95rem; color: var(--c2); margin-bottom: 3px; }
-.con-label { font-size: 0.72rem; color: var(--muted); }
 
 /* ── AGENDA ── */
 .agenda-grid { display: flex; flex-direction: column; }
@@ -451,27 +270,11 @@ nav a:hover::after { transform: scaleX(1); }
 .ag-title { font-size: 0.92rem; font-weight: 600; color: var(--white); margin-bottom: 2px; }
 .ag-sub { font-size: 0.78rem; color: var(--muted); font-weight: 300; }
 
-/* ── TEAM ── */
-.team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 2px; }
-.team-card {
-  padding: 24px 20px;
-  border: 1px solid var(--border);
-  background: var(--c3);
-  transition: border-color 0.25s, background 0.25s;
-}
-.team-card:hover { border-color: var(--border-h); background: var(--c4); }
-.tc-role { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.2em; color: var(--orange); text-transform: uppercase; margin-bottom: 8px; }
-.tc-name { font-size: 0.9rem; font-weight: 600; color: var(--white); margin-bottom: 2px; }
-.tc-person { font-size: 0.78rem; color: var(--c); font-family: var(--mono); }
-
 /* ── REGISTER ── */
 #register { text-align: center; padding: 120px 56px; position: relative; z-index: 1; }
 .register-inner {
-  max-width: 620px; margin: 0 auto;
-  padding: 64px 56px;
-  border: 1px solid var(--border);
-  background: var(--c3);
-  position: relative; overflow: hidden;
+  max-width: 620px; margin: 0 auto; padding: 64px 56px;
+  border: 1px solid var(--border); background: var(--c3); position: relative; overflow: hidden;
 }
 .register-inner::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent 10%, var(--c) 50%, transparent 90%); }
 .register-inner::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent 10%, var(--border) 50%, transparent 90%); }
@@ -481,57 +284,21 @@ nav a:hover::after { transform: scaleX(1); }
 .reg-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.8; margin-bottom: 40px; font-weight: 300; }
 .reg-limit { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; color: var(--muted); margin-top: 24px; }
 .reg-limit::before { content: ''; width: 6px; height: 6px; background: var(--orange); border-radius: 50%; flex-shrink: 0; animation: blink 1.5s ease infinite; }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
 /* ── FOOTER ── */
 footer {
-  position: relative; z-index: 1;
-  border-top: 1px solid var(--border);
-  padding: 40px 56px;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center; gap: 24px;
-  background: rgba(13,3,3,0.6);
+  position: relative; z-index: 1; border-top: 1px solid var(--border);
+  padding: 40px 56px; display: grid; grid-template-columns: 1fr auto 1fr;
+  align-items: center; gap: 24px; background: rgba(13,3,3,0.6);
 }
 .foot-logo { font-family: var(--mono); font-size: 0.82rem; letter-spacing: 0.18em; color: var(--c); }
 .foot-center { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); letter-spacing: 0.15em; text-align: center; line-height: 1.8; }
 .foot-right { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); letter-spacing: 0.12em; text-align: right; line-height: 1.8; }
 
 /* ── ANIMATIONS ── */
-@keyframes rise {
-  from { opacity: 0; transform: translateY(18px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ── CSS-ONLY scroll-triggered fade-ins via @keyframes + animation-timeline fallback ──
-   Uses animation-fill-mode: both so elements start invisible and reveal on load cascade */
-.tl-item,
-.prize-card,
-.team-card {
-  animation: rise 0.6s ease both;
-}
-.tl-item:nth-child(1)  { animation-delay: 0.05s; }
-.tl-item:nth-child(2)  { animation-delay: 0.13s; }
-.tl-item:nth-child(3)  { animation-delay: 0.21s; }
-.tl-item:nth-child(4)  { animation-delay: 0.29s; }
-.tl-item:nth-child(5)  { animation-delay: 0.37s; }
-.tl-item:nth-child(6)  { animation-delay: 0.45s; }
-.tl-item:nth-child(7)  { animation-delay: 0.53s; }
-
-.prize-card:nth-child(1) { animation-delay: 0.1s; }
-.prize-card:nth-child(2) { animation-delay: 0.2s; }
-.prize-card:nth-child(3) { animation-delay: 0.3s; }
-
-.team-card:nth-child(1)  { animation-delay: 0.05s; }
-.team-card:nth-child(2)  { animation-delay: 0.10s; }
-.team-card:nth-child(3)  { animation-delay: 0.15s; }
-.team-card:nth-child(4)  { animation-delay: 0.20s; }
-.team-card:nth-child(5)  { animation-delay: 0.25s; }
-.team-card:nth-child(6)  { animation-delay: 0.30s; }
-.team-card:nth-child(7)  { animation-delay: 0.35s; }
-.team-card:nth-child(8)  { animation-delay: 0.40s; }
-.team-card:nth-child(9)  { animation-delay: 0.45s; }
-.team-card:nth-child(10) { animation-delay: 0.50s; }
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+@keyframes scrollPulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
 </style>
 </head>
 <body>
@@ -546,7 +313,6 @@ footer {
     <a href="#timeline">Timeline</a>
     <a href="#prizes">Prizes</a>
     <a href="#agenda">Agenda</a>
-    <a href="#team">Team</a>
   </nav>
   <a href="#register" class="nav-cta">Register</a>
 </header>
@@ -571,27 +337,39 @@ footer {
   </div>
   <p class="hero-desc">
     One day. Eight teams. Real business problems.<br/>
-    Build AI agents powered by Microsoft 365 Copilot — and shape the future of CGC's operations.
+    Build AI agents powered by Microsoft Copilot — and shape the future of CGC's operations.
   </p>
   <div class="hero-actions">
     <a href="#register" class="btn btn-fill">Register Now</a>
     <a href="#about" class="btn btn-ghost">Learn More</a>
   </div>
-  <div class="scroll-hint">SCROLL TO EXPLORE</div>
-  <div class="hero-panel">
-    <div class="hero-stat-box">
-      <div class="hsb-val">40</div>
-      <div class="hsb-label">Total participants</div>
-    </div>
-    <div class="hero-stat-box">
-      <div class="hsb-val">2</div>
-      <div class="hsb-label">Pre-event bootcamps</div>
-    </div>
-    <div class="hero-stat-box">
-      <div class="hsb-val">FOC</div>
-      <div class="hsb-label">Venue (MS sponsor)</div>
+
+  <div class="countdown-wrap">
+    <div class="countdown-label">Event Countdown — 20 October 2026</div>
+    <div class="countdown-grid">
+      <div class="cd-unit">
+        <div class="cd-num">148</div>
+        <div class="cd-lbl">Days</div>
+      </div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit">
+        <div class="cd-num">00</div>
+        <div class="cd-lbl">Hours</div>
+      </div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit">
+        <div class="cd-num">00</div>
+        <div class="cd-lbl">Mins</div>
+      </div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit">
+        <div class="cd-num">00</div>
+        <div class="cd-lbl">Secs</div>
+      </div>
     </div>
   </div>
+
+  <div class="scroll-hint">SCROLL TO EXPLORE</div>
 </section>
 
 <div class="divider"></div>
@@ -601,7 +379,7 @@ footer {
   <h2 class="sec-title">What is <span>Agent-Thon</span>?</h2>
   <div class="about-layout">
     <div class="about-body">
-      <p>CGC Agent-Thon 2026 is a <strong>one-day internal hackathon</strong> where mixed teams of CGC professionals and university students build AI-powered agent solutions using <strong>Microsoft 365 Copilot</strong>.</p>
+      <p>CGC Agent-Thon 2026 is a <strong>one-day internal hackathon</strong> where mixed teams of CGC professionals and university students build AI-powered agent solutions using <strong>Microsoft Copilot</strong>.</p>
       <p>Hosted at <strong>Microsoft's Kuala Lumpur office</strong>, this event is more than a competition — it is a launchpad. The most promising prototypes will move into <strong>pilot implementation</strong>, directly impacting CGC's business operations.</p>
       <p>Before the main event, participants attend two intensive bootcamps: a <strong>Copilot Technical Training</strong> led by Microsoft experts, and a <strong>Business Use-Case Workshop</strong> anchored by CGC's own subject matter experts. Ongoing mentoring runs through to event day.</p>
       <p>This is CGC's commitment to building an <strong>AI-first culture</strong> — from the ground up, by the people who know the business best.</p>
@@ -613,9 +391,7 @@ footer {
       <div class="info-row"><div class="info-key">Format</div><div class="info-val">1-Day Hackathon</div></div>
       <div class="info-row"><div class="info-key">Teams</div><div class="info-val accent">8 teams × 5 members</div></div>
       <div class="info-row"><div class="info-key">Makeup</div><div class="info-val">3 CGC Staff + 2 Students</div></div>
-      <div class="info-row"><div class="info-key">Platform</div><div class="info-val">Microsoft 365 Copilot</div></div>
-      <div class="info-row"><div class="info-key">Sponsor</div><div class="info-val">COO — Executive Sponsor</div></div>
-      <div class="info-row"><div class="info-key">Outcome</div><div class="info-val accent">Top agents go to pilot</div></div>
+      <div class="info-row"><div class="info-key">Platform</div><div class="info-val">Microsoft Copilot</div></div>
     </div>
   </div>
 </div>
@@ -627,16 +403,16 @@ footer {
   <h2 class="sec-title">Road to <span>20 October</span></h2>
   <div class="timeline-wrap">
     <div class="tl-item">
-      <div class="tl-date">MAY 2026<br/>Week 3</div>
+      <div class="tl-date">JUN 2026</div>
       <div class="tl-line-wrap"><div class="tl-dot"></div><div class="tl-connector"></div></div>
       <div class="tl-card">
         <div class="tl-phase">Pre-Event</div>
-        <div class="tl-title">Kick-off & Committee Setup</div>
-        <div class="tl-desc">Project charter confirmed. Roles defined. Awareness campaign launched. Registrations open to CGC staff and partner universities.</div>
+        <div class="tl-title">Registration</div>
+        <div class="tl-desc">Registrations open to CGC staff and partner universities. Places strictly limited — 40 participants, 8 teams only.</div>
       </div>
     </div>
     <div class="tl-item">
-      <div class="tl-date">JUN 2026<br/>Week 2–3</div>
+      <div class="tl-date">JUN 2026</div>
       <div class="tl-line-wrap"><div class="tl-dot"></div><div class="tl-connector"></div></div>
       <div class="tl-card">
         <div class="tl-phase">Pre-Event</div>
@@ -645,16 +421,16 @@ footer {
       </div>
     </div>
     <div class="tl-item">
-      <div class="tl-date">JUN 2026<br/>Week 4</div>
+      <div class="tl-date">JUL 2026</div>
       <div class="tl-line-wrap"><div class="tl-dot"></div><div class="tl-connector"></div></div>
       <div class="tl-card">
         <div class="tl-phase">Pre-Event</div>
         <div class="tl-title">Bootcamp #1 — Copilot Technical Training</div>
-        <div class="tl-desc">Microsoft-led upskilling on M365 Copilot, prompt engineering and agent development. Hands-on sandbox experience for all participants.</div>
+        <div class="tl-desc">Microsoft-led upskilling on Copilot, prompt engineering and agent development. Hands-on sandbox experience for all participants.</div>
       </div>
     </div>
     <div class="tl-item">
-      <div class="tl-date">JUL 2026<br/>Week 1</div>
+      <div class="tl-date">JUL 2026</div>
       <div class="tl-line-wrap"><div class="tl-dot"></div><div class="tl-connector"></div></div>
       <div class="tl-card">
         <div class="tl-phase">Pre-Event</div>
@@ -663,16 +439,7 @@ footer {
       </div>
     </div>
     <div class="tl-item">
-      <div class="tl-date">JUL–SEP<br/>2026</div>
-      <div class="tl-line-wrap"><div class="tl-dot"></div><div class="tl-connector"></div></div>
-      <div class="tl-card">
-        <div class="tl-phase">Pre-Event</div>
-        <div class="tl-title">Mentoring, Dry-Run & Final Prep</div>
-        <div class="tl-desc">Ongoing team mentoring through August. Full technical dry-run in August. Judges' orientation and COO Go/No-Go sign-off in September.</div>
-      </div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-date">20 OCT<br/>2026</div>
+      <div class="tl-date">20 OCT 2026</div>
       <div class="tl-line-wrap"><div class="tl-dot" style="border-color:var(--c);background:var(--c);box-shadow:0 0 16px var(--c)"></div><div class="tl-connector"></div></div>
       <div class="tl-card" style="border-color:var(--border-h);background:rgba(255,26,26,0.07)">
         <div class="tl-phase event">⚡ Main Event</div>
@@ -681,7 +448,7 @@ footer {
       </div>
     </div>
     <div class="tl-item tl-last">
-      <div class="tl-date">NOV<br/>2026</div>
+      <div class="tl-date">NOV 2026</div>
       <div class="tl-line-wrap"><div class="tl-dot"></div></div>
       <div class="tl-card">
         <div class="tl-phase">Post-Event</div>
@@ -704,7 +471,7 @@ footer {
       <div class="prize-medal">🥈</div>
       <div class="prize-cash">RM 4,000</div>
       <div class="prize-per">RM 800 per member</div>
-      <div class="prize-note">Medal + Certificate<br/>for every team member</div>
+      <div class="prize-note">Certificate for every team member</div>
     </div>
     <div class="prize-card first">
       <div class="prize-shine"></div>
@@ -712,7 +479,7 @@ footer {
       <div class="prize-medal">🥇</div>
       <div class="prize-cash">RM 5,000</div>
       <div class="prize-per">RM 1,000 per member</div>
-      <div class="prize-note">Medal + Certificate<br/>+ Pilot Implementation</div>
+      <div class="prize-note">Certificate<br/>+ Pilot Implementation</div>
     </div>
     <div class="prize-card">
       <div class="prize-shine"></div>
@@ -720,20 +487,9 @@ footer {
       <div class="prize-medal">🥉</div>
       <div class="prize-cash">RM 3,000</div>
       <div class="prize-per">RM 600 per member</div>
-      <div class="prize-note">Medal + Certificate<br/>for every team member</div>
+      <div class="prize-note">Certificate for every team member</div>
     </div>
   </div>
-  <div class="consolation-strip">
-    <div class="con-card"><div class="con-amount">RM 500</div><div class="con-label">Per consolation team</div></div>
-    <div class="con-card"><div class="con-amount">RM 100</div><div class="con-label">Per member equiv.</div></div>
-    <div class="con-card"><div class="con-amount">Gift</div><div class="con-label">Voucher or hamper</div></div>
-    <div class="con-card"><div class="con-amount">Cert</div><div class="con-label">All participants</div></div>
-    <div class="con-card"><div class="con-amount">Swag</div><div class="con-label">RFID wallets (60–70 pax)</div></div>
-  </div>
-  <p style="margin-top:20px;font-family:var(--mono);font-size:0.65rem;color:var(--muted);letter-spacing:0.1em;line-height:1.8;">
-    * 5 consolation prizes for remaining teams. TRO and IT staff excluded from competition.<br/>
-    * Microsoft certification exam vouchers (50% discount) available for CGC employees via Enterprise Skilling Initiative.
-  </p>
 </div>
 
 <div class="divider"></div>
@@ -825,35 +581,18 @@ footer {
 
 <div class="divider"></div>
 
-<div class="section" id="team">
-  <div class="sec-label">05 — Organising Committee</div>
-  <h2 class="sec-title">The <span>Team</span> Behind It</h2>
-  <div class="team-grid">
-    <div class="team-card"><div class="tc-role">Executive Sponsor</div><div class="tc-name">Chief Operating Officer</div><div class="tc-person">COO</div></div>
-    <div class="team-card"><div class="tc-role">Event Director</div><div class="tc-name">Project Chair</div><div class="tc-person">Selveen · CGC TRO</div></div>
-    <div class="team-card"><div class="tc-role">Project Manager</div><div class="tc-name">PMO Lead</div><div class="tc-person">Khalil & Rajan · CGC TRO</div></div>
-    <div class="team-card"><div class="tc-role">Programme & Content</div><div class="tc-name">Agenda & Bootcamp Design</div><div class="tc-person">Shahrul & Sarah · CGC TRO</div></div>
-    <div class="team-card"><div class="tc-role">Technical & Platform</div><div class="tc-name">Copilot Setup & Testing</div><div class="tc-person">Calvin, Wai Hong · CGC IT<br/>Xin · Evopoint</div></div>
-    <div class="team-card"><div class="tc-role">Microsoft Liaison</div><div class="tc-name">MS Support Coordinator</div><div class="tc-person">David · CGC IT</div></div>
-    <div class="team-card"><div class="tc-role">University & Participants</div><div class="tc-name">Recruitment & Teams</div><div class="tc-person">Rajan · CGC TRO</div></div>
-    <div class="team-card"><div class="tc-role">Logistics & Venue</div><div class="tc-name">On-site Operations</div><div class="tc-person">Darren, Hajar, Shud · CGC<br/>CheeSeng · Microsoft</div></div>
-    <div class="team-card"><div class="tc-role">Marketing & Comms</div><div class="tc-name">Branding & Announcements</div><div class="tc-person">Solihin, Shahrul & Sarah</div></div>
-    <div class="team-card"><div class="tc-role">Judging & Awards</div><div class="tc-name">Scoring & Ceremony</div><div class="tc-person">Azura & Aina · CGC TRO</div></div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
 <div id="register">
   <div class="register-inner">
     <div class="reg-eyebrow">Join the Grid</div>
     <h2 class="reg-title">Ready to Build the<br/><span>Future of CGC?</span></h2>
     <p class="reg-desc">
       Registration is open to CGC staff and selected university students.<br/>
-      Places are strictly limited — 40 participants, 8 teams only.<br/>
       Register via Microsoft Forms before slots fill up.
     </p>
-    <a href="#" class="btn btn-fill">Register via MS Forms</a>
+    <div style="display:flex;flex-direction:column;gap:12px;align-items:center;">
+      <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=gfH5XjKqRES3xZeodxQdIxLXHcsO3VVBhpgKAAcfG4VUQURaNDVaUU05V0hLQ1NIRVFPRlJEUE5IUC4u" target="_blank" class="btn btn-fill" style="width:320px;text-align:center;">CGC Employees — Register</a>
+      <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=gfH5XjKqRES3xZeodxQdI3FwbPT9vKhImYFvRrYrXA9UMU05UlUxSVBBMVREVTE1QkRESEtMRURaSC4u" target="_blank" class="btn btn-ghost" style="width:320px;text-align:center;">University Students — Register</a>
+    </div>
     <div class="reg-limit">Registration closes once all 40 slots are filled</div>
   </div>
 </div>
