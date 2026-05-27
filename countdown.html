@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CGC × Microsoft Agent-Thon 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@300;400;700;800;900&family=Teko:wght@600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --c:      #ff1a1a;
+    --c2:     #cc0000;
+    --orange: #ff6600;
+    --bg:     #0d0303;
+    --white:  #f8eaea;
+    --muted:  rgba(240,200,200,0.5);
+    --border: rgba(255,26,26,0.22);
+    --mono:   'Share Tech Mono', monospace;
+    --sans:   'Exo 2', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    width: 100%; height: 100%;
+    background: var(--bg);
+    font-family: var(--sans);
+    overflow: hidden;
+  }
+
+  /* ── Grid background ── */
+  .bg-grid {
+    position: absolute; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(rgba(255,26,26,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,26,26,0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* ── Scanline sweep ── */
+  .bg-scan {
+    position: absolute; inset: 0; z-index: 0;
+    background: linear-gradient(180deg,
+      transparent 0%, transparent 23%,
+      rgba(255,26,26,0.04) 24%, transparent 25%,
+      transparent 48%, rgba(255,26,26,0.03) 49%,
+      transparent 50%, transparent 73%,
+      rgba(255,26,26,0.04) 74%, transparent 75%
+    );
+    animation: scanmove 14s ease-in-out infinite alternate;
+  }
+  @keyframes scanmove {
+    from { transform: translateY(-10%); }
+    to   { transform: translateY(10%); }
+  }
+
+  /* ── Radial vignette glow from centre ── */
+  .bg-glow {
+    position: absolute; inset: 0; z-index: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%,
+      rgba(255,26,26,0.08) 0%,
+      transparent 70%
+    );
+    animation: glowpulse 4s ease-in-out infinite alternate;
+  }
+  @keyframes glowpulse {
+    from { opacity: 0.6; }
+    to   { opacity: 1; }
+  }
+
+  /* ── Corner accents ── */
+  .corner {
+    position: absolute; z-index: 2;
+    width: 40px; height: 40px;
+    border-color: var(--c);
+    border-style: solid;
+    opacity: 0.5;
+  }
+  .corner-tl { top: 20px; left: 20px; border-width: 2px 0 0 2px; }
+  .corner-tr { top: 20px; right: 20px; border-width: 2px 2px 0 0; }
+  .corner-bl { bottom: 20px; left: 20px; border-width: 0 0 2px 2px; }
+  .corner-br { bottom: 20px; right: 20px; border-width: 0 2px 2px 0; }
+
+  /* ── Wrapper ── */
+  .banner {
+    position: relative;
+    width: 100%; height: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 28px 32px 20px;
+  }
+
+  /* ── Top bar ── */
+  .topbar {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      var(--c2) 20%,
+      var(--c) 50%,
+      var(--c2) 80%,
+      transparent 100%
+    );
+    box-shadow: 0 0 16px rgba(255,26,26,0.6);
+    animation: topbar-shine 3s ease-in-out infinite alternate;
+  }
+  @keyframes topbar-shine {
+    from { opacity: 0.7; }
+    to   { opacity: 1; box-shadow: 0 0 32px rgba(255,26,26,0.9); }
+  }
+
+  /* ── Eyebrow tag ── */
+  .eyebrow {
+    position: relative; z-index: 3;
+    font-family: var(--mono);
+    font-size: clamp(0.52rem, 1.1vw, 0.68rem);
+    letter-spacing: 0.3em;
+    color: var(--orange);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: flex; align-items: center; gap: 12px;
+    animation: rise 0.7s 0.2s ease both;
+  }
+  .eyebrow::before, .eyebrow::after {
+    content: '';
+    height: 1px; width: 28px;
+    background: var(--orange);
+    box-shadow: 0 0 6px var(--orange);
+  }
+
+  .title-wrap {
+    position: relative; z-index: 3;
+    text-align: center;
+    margin-bottom: 6px;
+    animation: rise 0.8s 0.35s ease both;
+  }
+  .title-sub {
+    font-family: var(--mono);
+    font-size: clamp(0.52rem, 1vw, 0.68rem);
+    letter-spacing: 0.35em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .title-main {
+    font-family: 'Teko', sans-serif;
+    font-size: clamp(2.4rem, 6.5vw, 6rem);
+    font-weight: 700;
+    line-height: 0.88;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--white);
+    -webkit-text-stroke: 0.5px rgba(255,26,26,0.18);
+    filter: drop-shadow(0 2px 0px rgba(0,0,0,0.8));
+  }
+  .title-main .accent {
+    color: var(--c);
+    -webkit-text-stroke: 0.5px rgba(255,26,26,0.4);
+    text-shadow:
+      0 0 18px rgba(255,26,26,0.7),
+      0 0 50px rgba(255,26,26,0.3),
+      0 0 90px rgba(255,26,26,0.12);
+    filter: none;
+  }
+  .title-year {
+    font-family: var(--mono);
+    font-size: clamp(0.6rem, 1.2vw, 0.78rem);
+    letter-spacing: 0.4em;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .title-year {
+    font-family: var(--mono);
+    font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+    letter-spacing: 0.4em;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+
+  /* ── Rule ── */
+  .rule {
+    position: relative; z-index: 3;
+    width: min(520px, 80%);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--c), transparent);
+    margin: 22px auto;
+    animation: rise 0.6s 0.5s ease both;
+  }
+
+  /* ── Tagline ── */
+  .tagline {
+    position: relative; z-index: 3;
+    font-size: clamp(0.78rem, 1.6vw, 0.98rem);
+    font-weight: 300;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-align: center;
+    margin-bottom: 36px;
+    animation: rise 0.7s 0.6s ease both;
+  }
+
+  /* ── Countdown ── */
+  .countdown {
+    position: relative; z-index: 3;
+    display: flex;
+    gap: clamp(8px, 2.5vw, 24px);
+    align-items: center;
+    margin-bottom: 36px;
+    animation: rise 0.8s 0.75s ease both;
+  }
+
+  .cd-block {
+    display: flex; flex-direction: column; align-items: center;
+    padding: clamp(14px, 2.5vw, 22px) clamp(12px, 2.5vw, 28px);
+    border: 1px solid var(--border);
+    background: rgba(255,26,26,0.05);
+    position: relative;
+    min-width: clamp(64px, 10vw, 100px);
+    transition: border-color 0.3s;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+  .cd-block:hover { border-color: rgba(255,26,26,0.5); }
+  .cd-block::before {
+    content: '';
+    position: absolute; top: 0; left: 8px; right: 8px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--c), transparent);
+    opacity: 0.6;
+  }
+  .cd-num {
+    font-family: var(--mono);
+    font-size: clamp(2rem, 5vw, 4rem);
+    color: var(--c);
+    line-height: 1;
+    text-shadow: 0 0 20px rgba(255,26,26,0.5);
+    transition: transform 0.15s ease;
+  }
+  .cd-num.flip { transform: scale(1.12); }
+  .cd-label {
+    font-family: var(--mono);
+    font-size: clamp(0.52rem, 1vw, 0.65rem);
+    letter-spacing: 0.22em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  .cd-sep {
+    font-family: var(--mono);
+    font-size: clamp(1.4rem, 3vw, 2.4rem);
+    color: var(--c2);
+    opacity: 0.5;
+    animation: blink 1.2s step-end infinite;
+    align-self: center;
+    margin-bottom: 20px;
+  }
+  @keyframes blink { 0%,100%{opacity:0.5} 50%{opacity:0.1} }
+
+  /* ── Meta strip ── */
+  .meta-strip {
+    position: relative; z-index: 3;
+    display: flex;
+    gap: clamp(16px, 4vw, 48px);
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: rise 0.7s 0.9s ease both;
+  }
+  .meta-item {
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--mono);
+    font-size: clamp(0.55rem, 1.2vw, 0.7rem);
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .meta-dot {
+    width: 6px; height: 6px;
+    background: var(--c);
+    transform: rotate(45deg);
+    box-shadow: 0 0 6px var(--c);
+    flex-shrink: 0;
+  }
+  .meta-val { color: var(--white); font-weight: 500; }
+
+  /* ── CTA ── */
+  .cta-wrap {
+    position: relative; z-index: 3;
+    margin-top: 30px;
+    animation: rise 0.7s 1.05s ease both;
+  }
+  .cta-btn {
+    font-family: var(--mono);
+    font-size: clamp(0.65rem, 1.3vw, 0.78rem);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--bg);
+    background: var(--c);
+    padding: clamp(10px, 1.5vw, 14px) clamp(28px, 4vw, 48px);
+    clip-path: polygon(14px 0%, 100% 0%, calc(100% - 14px) 100%, 0% 100%);
+    box-shadow: 0 0 24px rgba(255,26,26,0.4);
+    display: inline-block;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+    cursor: pointer;
+  }
+  .cta-btn:hover {
+    background: #fff;
+    box-shadow: 0 0 48px rgba(255,26,26,0.7);
+    transform: translateY(-2px);
+  }
+
+  /* ── Finished state ── */
+  .finished-msg {
+    display: none;
+    font-family: var(--mono);
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--c);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-shadow: 0 0 20px rgba(255,26,26,0.6);
+    animation: glowpulse 1.5s ease-in-out infinite alternate;
+  }
+
+  /* ── Floating particles ── */
+  .particles { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+  .particle {
+    position: absolute;
+    width: 2px; height: 2px;
+    background: var(--c);
+    border-radius: 50%;
+    opacity: 0;
+    animation: float-up var(--dur) var(--delay) ease-in infinite;
+  }
+  @keyframes float-up {
+    0%   { opacity: 0; transform: translateY(0) scale(1); }
+    10%  { opacity: 0.6; }
+    80%  { opacity: 0.2; }
+    100% { opacity: 0; transform: translateY(-120px) scale(0.3); }
+  }
+
+  /* ── Bottom bar ── */
+  .bottombar {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+      transparent 0%, var(--border) 30%,
+      var(--border) 70%, transparent 100%
+    );
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<div class="banner" id="banner">
+  <!-- backgrounds -->
+  <div class="bg-grid"></div>
+  <div class="bg-scan"></div>
+  <div class="bg-glow"></div>
+  <div class="particles" id="particles"></div>
+
+  <!-- corner accents -->
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+
+  <!-- top/bottom bar -->
+  <div class="topbar"></div>
+  <div class="bottombar"></div>
+
+  <!-- content -->
+  <div class="eyebrow">CGC × Microsoft Malaysia · Kuala Lumpur</div>
+
+  <div class="title-wrap">
+    <div class="title-sub">Internal Hackathon · One Day · Real Impact</div>
+    <div class="title-main">
+      CGC &times; MICROSOFT<br/>
+      <span class="accent">AGENT</span>&nbsp;-&nbsp;THON
+    </div>
+    <div class="title-year">// 2026 //</div>
+  </div>
+
+  <div class="rule"></div>
+
+  <div class="tagline">
+    One day. Eight teams. Real business problems. Build AI agents that shape CGC's future.
+  </div>
+
+  <!-- COUNTDOWN -->
+  <div class="countdown" id="countdown">
+    <div class="cd-block">
+      <div class="cd-num" id="cd-days">000</div>
+      <div class="cd-label">Days</div>
+    </div>
+    <div class="cd-sep">:</div>
+    <div class="cd-block">
+      <div class="cd-num" id="cd-hours">00</div>
+      <div class="cd-label">Hours</div>
+    </div>
+    <div class="cd-sep">:</div>
+    <div class="cd-block">
+      <div class="cd-num" id="cd-mins">00</div>
+      <div class="cd-label">Minutes</div>
+    </div>
+    <div class="cd-sep">:</div>
+    <div class="cd-block">
+      <div class="cd-num" id="cd-secs">00</div>
+      <div class="cd-label">Seconds</div>
+    </div>
+  </div>
+
+  <div class="finished-msg" id="finished">⚡ Event Is Live — Join Now</div>
+
+  <!-- Meta strip -->
+  <div class="meta-strip">
+    <div class="meta-item"><div class="meta-dot"></div>Date <span class="meta-val">20 OCT 2026</span></div>
+    <div class="meta-item"><div class="meta-dot"></div>Venue <span class="meta-val">Microsoft KL Office</span></div>
+    <div class="meta-item"><div class="meta-dot"></div>Teams <span class="meta-val">8 × 5 Members</span></div>
+    <div class="meta-item"><div class="meta-dot"></div>Platform <span class="meta-val">M365 Copilot</span></div>
+  </div>
+
+  <div class="cta-wrap">
+    <a href="#" class="cta-btn">Register Now</a>
+  </div>
+</div>
+
+<script>
+  // ── Countdown ──────────────────────────────────
+  const target = new Date('2026-10-20T09:00:00+08:00').getTime();
+
+  const elDays  = document.getElementById('cd-days');
+  const elHours = document.getElementById('cd-hours');
+  const elMins  = document.getElementById('cd-mins');
+  const elSecs  = document.getElementById('cd-secs');
+  const cdWrap  = document.getElementById('countdown');
+  const finMsg  = document.getElementById('finished');
+
+  function pad(n, w) { return String(n).padStart(w, '0'); }
+
+  function flashFlip(el) {
+    el.classList.add('flip');
+    setTimeout(() => el.classList.remove('flip'), 150);
+  }
+
+  let prevSecs = -1;
+  function tick() {
+    const now  = Date.now();
+    const diff = target - now;
+
+    if (diff <= 0) {
+      cdWrap.style.display = 'none';
+      finMsg.style.display = 'block';
+      return;
+    }
+
+    const days  = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins  = Math.floor((diff % 3600000)  / 60000);
+    const secs  = Math.floor((diff % 60000)    / 1000);
+
+    if (secs !== prevSecs) {
+      flashFlip(elSecs);
+      if (secs === 59) flashFlip(elMins);
+      prevSecs = secs;
+    }
+
+    elDays.textContent  = pad(days, 3);
+    elHours.textContent = pad(hours, 2);
+    elMins.textContent  = pad(mins, 2);
+    elSecs.textContent  = pad(secs, 2);
+
+    requestAnimationFrame(tick);
+  }
+  tick();
+
+  // ── Floating particles ─────────────────────────
+  const container = document.getElementById('particles');
+  const count = 28;
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.cssText = `
+      left: ${Math.random() * 100}%;
+      bottom: ${Math.random() * 30}%;
+      --dur: ${3 + Math.random() * 6}s;
+      --delay: ${Math.random() * 8}s;
+      width: ${1 + Math.random() * 2.5}px;
+      height: ${1 + Math.random() * 2.5}px;
+    `;
+    container.appendChild(p);
+  }
+</script>
+</body>
+</html>
