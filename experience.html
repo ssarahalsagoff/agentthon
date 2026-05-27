@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Agent-Thon Experience</title>
+
+<style>
+:root{
+  --c:#ff1a1a;
+  --bg:#0d0303;
+  --surface:#160606;
+  --text:#f8eaea;
+  --muted:rgba(240,200,200,0.5);
+  --border:rgba(255,26,26,0.25);
+  --mono:'Share Tech Mono', monospace;
+  --sans:'Exo 2', sans-serif;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--sans);
+  padding:60px 20px;
+}
+
+/* grid background */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    linear-gradient(rgba(255,26,26,0.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,26,26,0.06) 1px,transparent 1px);
+  background-size:60px 60px;
+  z-index:0;
+}
+
+.wrapper{
+  position:relative;
+  z-index:2;
+  max-width:1100px;
+  margin:auto;
+}
+
+/* title */
+.title{
+  text-align:center;
+  margin-bottom:40px;
+}
+
+.title small{
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:0.3em;
+  color:var(--muted);
+}
+
+.title h2{
+  font-size:42px;
+  margin-top:8px;
+  letter-spacing:0.08em;
+}
+
+.title span{
+  color:var(--c);
+  text-shadow:0 0 15px rgba(255,26,26,0.6);
+}
+
+/* grid */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:24px;
+}
+
+/* card */
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  padding:24px 20px;
+  position:relative;
+  clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px);
+  transition:all 0.3s ease;
+}
+
+.card:hover{
+  border-color:var(--c);
+  box-shadow:0 0 20px rgba(255,26,26,0.2);
+  transform:translateY(-4px);
+}
+
+/* top line */
+.card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:12px;
+  right:12px;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--c),transparent);
+}
+
+/* number */
+.num{
+  font-family:var(--mono);
+  color:var(--c);
+  font-size:14px;
+  letter-spacing:0.3em;
+  margin-bottom:12px;
+}
+
+/* heading */
+.card h3{
+  font-size:18px;
+  margin-bottom:8px;
+}
+
+/* text */
+.card p{
+  font-size:14px;
+  color:var(--muted);
+  line-height:1.6;
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+  <div class="title">
+    <small>// EXPERIENCE //</small>
+    <h2>What You’ll <span>Build</span></h2>
+  </div>
+
+  <div class="grid">
+
+    <div class="card">
+      <div class="num">01</div>
+      <h3>Real Business Problems</h3>
+      <p>
+        Work on real CGC challenges that require practical, impactful solutions.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="num">02</div>
+      <h3>AI Agent Development</h3>
+      <p>
+        Build intelligent solutions using Microsoft Copilot and automation tools.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="num">03</div>
+      <h3>Team Collaboration</h3>
+      <p>
+        Collaborate in mixed teams of CGC staff and university students.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="num">04</div>
+      <h3>Pitch & Showcase</h3>
+      <p>
+        Present your solution to judges and demonstrate real value impact.
+      </p>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
