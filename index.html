@@ -137,35 +137,6 @@ nav a:hover::after { transform: scaleX(1); }
   margin-bottom: 56px; animation: rise 0.7s 0.85s ease both;
 }
 
-/* ── COUNTDOWN ── */
-.countdown-wrap {
-  display: flex; flex-direction: column; gap: 10px;
-  max-width: 560px; animation: rise 0.7s 1s ease both;
-}
-.countdown-label {
-  font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.25em;
-  color: var(--orange); text-transform: uppercase;
-  display: flex; align-items: center; gap: 8px;
-}
-.countdown-label::before {
-  content: ''; width: 6px; height: 6px; background: var(--orange); border-radius: 50%;
-  animation: blink 1.5s ease infinite;
-}
-.countdown-grid { display: flex; gap: 2px; }
-.cd-unit {
-  display: flex; flex-direction: column; align-items: center;
-  padding: 16px 20px; border: 1px solid var(--border);
-  background: var(--c3); min-width: 80px; position: relative; overflow: hidden;
-}
-.cd-unit::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--c), transparent); opacity: 0.5;
-}
-.cd-unit:hover { border-color: var(--border-h); }
-.cd-num { font-family: var(--mono); font-size: 2rem; color: var(--c); text-shadow: 0 0 16px rgba(255,26,26,0.5); line-height: 1; margin-bottom: 4px; }
-.cd-lbl { font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.2em; color: var(--muted); text-transform: uppercase; }
-.cd-sep { display: flex; align-items: flex-start; padding: 14px 4px 0; font-family: var(--mono); font-size: 1.6rem; color: rgba(255,26,26,0.3); }
-
 .scroll-hint {
   position: absolute; bottom: 36px; left: 56px;
   font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.2em;
@@ -342,31 +313,6 @@ footer {
   <div class="hero-actions">
     <a href="#register" class="btn btn-fill">Register Now</a>
     <a href="#about" class="btn btn-ghost">Learn More</a>
-  </div>
-
-  <div class="countdown-wrap">
-    <div class="countdown-label">Event Countdown — 20 October 2026</div>
-    <div class="countdown-grid">
-      <div class="cd-unit">
-        <div class="cd-num">148</div>
-        <div class="cd-lbl">Days</div>
-      </div>
-      <div class="cd-sep">:</div>
-      <div class="cd-unit">
-        <div class="cd-num">00</div>
-        <div class="cd-lbl">Hours</div>
-      </div>
-      <div class="cd-sep">:</div>
-      <div class="cd-unit">
-        <div class="cd-num">00</div>
-        <div class="cd-lbl">Mins</div>
-      </div>
-      <div class="cd-sep">:</div>
-      <div class="cd-unit">
-        <div class="cd-num">00</div>
-        <div class="cd-lbl">Secs</div>
-      </div>
-    </div>
   </div>
 
   <div class="scroll-hint">SCROLL TO EXPLORE</div>
