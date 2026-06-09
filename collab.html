@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'Share Tech Mono', monospace;
+    overflow: hidden;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  /* top line decorators */
+  .top-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  .top-line::before,
+  .top-line::after {
+    content: '';
+    width: 48px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #ff6600);
+  }
+  .top-line::after {
+    background: linear-gradient(90deg, #ff6600, transparent);
+  }
+  .top-line span {
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: #ff6600;
+    text-transform: uppercase;
+  }
+
+  /* main text */
+  .main-text {
+    font-family: 'Exo 2', sans-serif;
+    font-size: clamp(1.1rem, 3vw, 1.6rem);
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #f8eaea;
+    text-shadow: 0 0 20px rgba(255,26,26,0.3);
+    position: relative;
+    cursor: default;
+    transition: letter-spacing 0.4s ease;
+  }
+  .main-text:hover {
+    letter-spacing: 0.35em;
+    text-shadow: 0 0 30px rgba(255,26,26,0.6);
+  }
+  .main-text .highlight {
+    color: #ff1a1a;
+    text-shadow: 0 0 16px rgba(255,26,26,0.7);
+  }
+
+  /* glitch effect on hover */
+  .main-text:hover::before {
+    content: attr(data-text);
+    position: absolute;
+    left: 2px; top: 0;
+    color: #ff1a1a;
+    clip-path: polygon(0 30%, 100% 30%, 100% 50%, 0 50%);
+    opacity: 0.4;
+    animation: glitch 0.3s steps(2) infinite;
+  }
+
+  /* bottom dashes */
+  .bottom-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .dash {
+    width: 6px; height: 6px;
+    background: #ff1a1a;
+    transform: rotate(45deg);
+    opacity: 0;
+    animation: popIn 0.4s ease forwards;
+    box-shadow: 0 0 6px #ff1a1a;
+  }
+  .dash:nth-child(1) { animation-delay: 0.6s; }
+  .dash:nth-child(2) { animation-delay: 0.75s; width:4px; height:4px; background:#ff6600; }
+  .dash:nth-child(3) { animation-delay: 0.9s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes popIn {
+    from { opacity: 0; transform: rotate(45deg) scale(0); }
+    to   { opacity: 1; transform: rotate(45deg) scale(1); }
+  }
+  @keyframes glitch {
+    0%   { clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%); transform: translateX(-2px); }
+    100% { clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%); transform: translateX(2px); }
+  }
+</style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="top-line"><span>Official Partners</span></div>
+    <div class="main-text" data-text="In Collaboration With">
+      In <span class="highlight">Collaboration</span> With
+    </div>
+    <div class="bottom-line">
+      <div class="dash"></div>
+      <div class="dash"></div>
+      <div class="dash"></div>
+    </div>
+  </div>
+</body>
+</html>
