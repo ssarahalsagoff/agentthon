@@ -5,7 +5,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
     background: transparent;
     display: flex;
@@ -15,7 +14,6 @@
     font-family: 'Share Tech Mono', monospace;
     overflow: hidden;
   }
-
   .wrapper {
     display: flex;
     flex-direction: column;
@@ -23,8 +21,6 @@
     gap: 6px;
     animation: fadeUp 0.8s ease both;
   }
-
-  /* top line decorators */
   .top-line {
     display: flex;
     align-items: center;
@@ -47,8 +43,6 @@
     color: #ff6600;
     text-transform: uppercase;
   }
-
-  /* main text */
   .main-text {
     font-family: 'Exo 2', sans-serif;
     font-size: clamp(1.1rem, 3vw, 1.6rem);
@@ -69,8 +63,6 @@
     color: #ff1a1a;
     text-shadow: 0 0 16px rgba(255,26,26,0.7);
   }
-
-  /* glitch effect on hover */
   .main-text:hover::before {
     content: attr(data-text);
     position: absolute;
@@ -81,12 +73,27 @@
     animation: glitch 0.3s steps(2) infinite;
   }
 
-  /* bottom dashes */
+  /* ── NEW: subtitle line ── */
+  .sub-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: clamp(0.55rem, 1.2vw, 0.7rem);
+    letter-spacing: 0.18em;
+    color: rgba(240,200,200,0.5);
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 2px;
+    animation: fadeUp 0.8s 0.4s ease both;
+    opacity: 0;
+  }
+  .sub-text .accent {
+    color: rgba(255,102,0,0.8);
+  }
+
   .bottom-line {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-top: 4px;
+    margin-top: 6px;
   }
   .dash {
     width: 6px; height: 6px;
@@ -119,6 +126,9 @@
     <div class="top-line"><span>Official Partners</span></div>
     <div class="main-text" data-text="In Collaboration With">
       In <span class="highlight">Collaboration</span> With
+    </div>
+    <div class="sub-text">
+      Organised by <span class="accent">CGC TRO</span> with <span class="accent">CGC IT</span> · In Partnership with <span class="accent">Microsoft Malaysia</span>
     </div>
     <div class="bottom-line">
       <div class="dash"></div>
