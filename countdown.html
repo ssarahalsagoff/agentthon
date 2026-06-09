@@ -37,7 +37,6 @@
       margin: 0;
     }
 
-    /* Background layers */
     .bg-grid {
       position: absolute;
       inset: 0;
@@ -90,7 +89,6 @@
       to   { opacity: 1; }
     }
 
-    /* Main banner */
     .banner {
       position: relative;
       width: 100%;
@@ -105,7 +103,6 @@
       isolation: isolate;
     }
 
-    /* Accent bars */
     .topbar {
       position: absolute;
       top: 0;
@@ -146,7 +143,6 @@
       to   { opacity: 1; box-shadow: 0 0 24px rgba(255, 26, 26, 0.8); }
     }
 
-    /* Corner accents */
     .corner {
       position: absolute;
       z-index: 2;
@@ -162,7 +158,6 @@
     .corner-bl { bottom: 22px; left: 22px; border-width: 0 0 2px 2px; }
     .corner-br { bottom: 22px; right: 22px; border-width: 0 2px 2px 0; }
 
-    /* Eyebrow */
     .eyebrow {
       position: relative;
       z-index: 3;
@@ -190,7 +185,6 @@
       box-shadow: 0 0 6px var(--orange);
     }
 
-    /* Title */
     .title-wrap {
       position: relative;
       z-index: 3;
@@ -208,9 +202,10 @@
       margin-bottom: 4px;
     }
 
+    /* CHANGED: bumped from clamp(2rem, 5vw, 4.8rem) to clamp(2.8rem, 7vw, 6.8rem) */
     .title-main {
       font-family: 'Teko', sans-serif;
-      font-size: clamp(2rem, 5vw, 4.8rem);
+      font-size: clamp(2.8rem, 7vw, 6.8rem);
       font-weight: 700;
       line-height: 0.88;
       letter-spacing: 0.14em;
@@ -238,7 +233,6 @@
       margin-top: 4px;
     }
 
-    /* Rule */
     .rule {
       position: relative;
       z-index: 3;
@@ -249,7 +243,6 @@
       animation: rise 0.6s 0.5s ease both;
     }
 
-    /* Tagline */
     .tagline {
       position: relative;
       z-index: 3;
@@ -264,7 +257,6 @@
       animation: rise 0.7s 0.6s ease both;
     }
 
-    /* Countdown */
     .countdown {
       position: relative;
       z-index: 3;
@@ -342,7 +334,6 @@
       50% { opacity: 0.12; }
     }
 
-    /* Finished state */
     .finished-msg {
       display: none;
       font-family: var(--mono);
@@ -357,16 +348,19 @@
       z-index: 3;
     }
 
-    /* Meta strip */
     .meta-strip {
       position: relative;
       z-index: 3;
       display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
       gap: clamp(12px, 2.5vw, 30px);
-      flex-wrap: wrap;
       justify-content: center;
+      align-items: center;
       animation: rise 0.7s 0.9s ease both;
       padding: 0 10px;
+      width: 100%;
+      overflow: hidden;
     }
 
     .meta-item {
@@ -374,11 +368,12 @@
       align-items: center;
       gap: 8px;
       font-family: var(--mono);
-      font-size: clamp(0.5rem, 1vw, 0.68rem);
+      font-size: clamp(0.45rem, 1vw, 0.68rem);
       letter-spacing: 0.13em;
       color: var(--muted);
       text-transform: uppercase;
       white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .meta-dot {
@@ -395,7 +390,6 @@
       font-weight: 500;
     }
 
-    /* Floating particles */
     .particles {
       position: absolute;
       inset: 0;
@@ -426,7 +420,6 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* Responsive */
     @media (max-width: 1200px) {
       .banner {
         min-height: 430px;
@@ -434,7 +427,7 @@
       }
 
       .title-main {
-        font-size: clamp(1.9rem, 4.5vw, 4.2rem);
+        font-size: clamp(2.4rem, 6vw, 5.8rem);
       }
 
       .tagline {
@@ -467,15 +460,7 @@
       }
 
       .meta-strip {
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .meta-item {
-        white-space: normal;
-        justify-content: center;
-        text-align: center;
+        gap: 10px;
       }
     }
 
@@ -506,13 +491,11 @@
 <body>
 
   <div class="banner" id="banner">
-    <!-- Backgrounds -->
     <div class="bg-grid"></div>
     <div class="bg-scan"></div>
     <div class="bg-glow"></div>
     <div class="particles" id="particles"></div>
 
-    <!-- Accents -->
     <div class="topbar"></div>
     <div class="bottombar"></div>
     <div class="corner corner-tl"></div>
@@ -520,7 +503,6 @@
     <div class="corner corner-bl"></div>
     <div class="corner corner-br"></div>
 
-    <!-- Content -->
     <div class="eyebrow">CGC × Microsoft Malaysia · Kuala Lumpur</div>
 
     <div class="title-wrap">
@@ -583,13 +565,12 @@
       </div>
       <div class="meta-item">
         <div class="meta-dot"></div>
-        Platform <span class="meta-val">M365 Copilot</span>
+        Platform <span class="meta-val">Microsoft Copilot</span>
       </div>
     </div>
   </div>
 
   <script>
-    // Countdown target
     const target = new Date('2026-10-20T09:00:00+08:00').getTime();
 
     const elDays = document.getElementById('cd-days');
@@ -643,7 +624,6 @@
 
     tick();
 
-    // Floating particles
     const container = document.getElementById('particles');
     const count = 28;
 
