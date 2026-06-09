@@ -94,61 +94,6 @@ nav a:hover::after { transform: scaleX(1); }
 }
 .nav-cta:hover { background: #fff; box-shadow: 0 0 20px rgba(255,26,26,0.6); }
 
-/* ── HERO ── */
-#hero {
-  position: relative; z-index: 1; min-height: 100vh;
-  display: flex; flex-direction: column;
-  justify-content: center; align-items: flex-start;
-  padding: 120px 56px 80px; overflow: hidden;
-}
-.hero-tag {
-  font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.25em;
-  color: var(--orange); margin-bottom: 28px;
-  display: flex; align-items: center; gap: 12px;
-  animation: rise 0.7s 0.2s ease both;
-}
-.hero-tag::before { content: ''; width: 32px; height: 1px; background: var(--orange); box-shadow: 0 0 6px var(--orange); }
-.hero-title {
-  font-family: var(--sans); font-size: clamp(3.5rem, 8vw, 7.5rem);
-  font-weight: 800; line-height: 0.95; letter-spacing: -0.02em;
-  color: var(--white); margin-bottom: 12px;
-  animation: rise 0.8s 0.35s ease both;
-}
-.hero-title em { font-style: normal; color: var(--c); text-shadow: 0 0 30px rgba(255,26,26,0.5), 0 0 60px rgba(255,26,26,0.2); }
-.hero-rule {
-  width: 100%; max-width: 560px; height: 1px;
-  background: linear-gradient(90deg, var(--c), transparent);
-  margin: 28px 0; animation: rise 0.6s 0.5s ease both;
-}
-.hero-meta {
-  display: flex; gap: 40px; flex-wrap: wrap;
-  margin-bottom: 48px; animation: rise 0.7s 0.6s ease both;
-}
-.hero-meta-item { display: flex; flex-direction: column; gap: 2px; }
-.hero-meta-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.2em; color: var(--muted); text-transform: uppercase; }
-.hero-meta-val { font-family: var(--mono); font-size: 1.1rem; color: var(--c); }
-.hero-desc {
-  max-width: 500px; font-size: 1rem; font-weight: 300;
-  color: var(--muted); line-height: 1.85; margin-bottom: 52px;
-  animation: rise 0.7s 0.7s ease both;
-}
-.hero-actions {
-  display: flex; gap: 16px; align-items: center;
-  margin-bottom: 56px; animation: rise 0.7s 0.85s ease both;
-}
-
-.scroll-hint {
-  position: absolute; bottom: 36px; left: 56px;
-  font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.2em;
-  color: var(--muted); display: flex; align-items: center; gap: 10px;
-  animation: rise 0.6s 1.2s ease both;
-}
-.scroll-hint::before {
-  content: ''; width: 1px; height: 32px;
-  background: linear-gradient(180deg, transparent, var(--c));
-  animation: scrollPulse 2s ease infinite;
-}
-
 /* ── BUTTONS ── */
 .btn {
   font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.15em;
@@ -288,39 +233,7 @@ footer {
   <a href="#register" class="nav-cta">Register</a>
 </header>
 
-<section id="hero">
-  <div class="hero-tag">CGC × Microsoft Malaysia · Kuala Lumpur</div>
-  <h1 class="hero-title">CGC<br/><em>AGENT</em>-THON</h1>
-  <div class="hero-rule"></div>
-  <div class="hero-meta">
-    <div class="hero-meta-item">
-      <span class="hero-meta-label">Date</span>
-      <span class="hero-meta-val">20 OCT 2026</span>
-    </div>
-    <div class="hero-meta-item">
-      <span class="hero-meta-label">Venue</span>
-      <span class="hero-meta-val">Microsoft KL</span>
-    </div>
-    <div class="hero-meta-item">
-      <span class="hero-meta-label">Teams</span>
-      <span class="hero-meta-val">8 × 5 PAX</span>
-    </div>
-  </div>
-  <p class="hero-desc">
-    One day. Eight teams. Real business problems.<br/>
-    Build AI agents powered by Microsoft Copilot — and shape the future of CGC's operations.
-  </p>
-  <div class="hero-actions">
-    <a href="#register" class="btn btn-fill">Register Now</a>
-    <a href="#about" class="btn btn-ghost">Learn More</a>
-  </div>
-
-  <div class="scroll-hint">SCROLL TO EXPLORE</div>
-</section>
-
-<div class="divider"></div>
-
-<div class="section" id="about">
+<div class="section" id="about" style="padding-top:120px;">
   <div class="sec-label">01 — About</div>
   <h2 class="sec-title">What is <span>Agent-Thon</span>?</h2>
   <div class="about-layout">
@@ -362,7 +275,7 @@ footer {
       <div class="tl-line-wrap"><div class="tl-dot"></div><div class="tl-connector"></div></div>
       <div class="tl-card">
         <div class="tl-phase">Pre-Event</div>
-        <div class="tl-title">Participant Selection & Team Formation</div>
+        <div class="tl-title">Participant Selection &amp; Team Formation</div>
         <div class="tl-desc">40 participants confirmed (24 CGC + 16 students). 8 teams of 5 formed. Mentors assigned. Hack Pack distributed to all participants.</div>
       </div>
     </div>
@@ -398,7 +311,7 @@ footer {
       <div class="tl-line-wrap"><div class="tl-dot"></div></div>
       <div class="tl-card">
         <div class="tl-phase">Post-Event</div>
-        <div class="tl-title">Showcase, Pilot & Project Closure</div>
+        <div class="tl-title">Showcase, Pilot &amp; Project Closure</div>
         <div class="tl-desc">Top 1–3 agents shortlisted for pilot. Management showcase to COO and executives. Winning prototypes handed to BU owners for production development.</div>
       </div>
     </div>
@@ -408,7 +321,7 @@ footer {
 <div class="divider"></div>
 
 <div class="section" id="prizes">
-  <div class="sec-label">03 — Prizes & Awards</div>
+  <div class="sec-label">03 — Prizes &amp; Awards</div>
   <h2 class="sec-title">Compete for <span>Glory</span></h2>
   <div class="prizes-layout">
     <div class="prize-card">
@@ -447,79 +360,73 @@ footer {
     <div class="ag-row">
       <div class="ag-time">09:00–09:30</div>
       <div class="ag-content">
-        <div class="ag-title">Guest Arrival, Registration & Breakfast</div>
-        <div class="ag-sub">T-shirts & participant kits distributed · Volunteers + Logistics Lead</div>
+        <div class="ag-title">Registration &amp; Breakfast</div>
       </div>
     </div>
     <div class="ag-row">
-      <div class="ag-time">09:30–09:45</div>
+      <div class="ag-time">09:30–10:00</div>
       <div class="ag-content">
-        <div class="ag-title">Welcome & Opening Remarks</div>
-        <div class="ag-sub">CGC COO (Executive Sponsor) + Microsoft Representative</div>
+        <div class="ag-title">Welcome &amp; Opening Remarks</div>
+        <div class="ag-sub"><em>CGC and Microsoft Representative</em></div>
       </div>
     </div>
     <div class="ag-row">
-      <div class="ag-time">09:45–10:15</div>
+      <div class="ag-time">10:00–10:30</div>
       <div class="ag-content">
-        <div class="ag-title">Microsoft Briefing — Latest in Copilot & Prompt Engineering</div>
-        <div class="ag-sub">Microsoft Mentors · Technical Lead</div>
-      </div>
-    </div>
-    <div class="ag-row">
-      <div class="ag-time">10:15–11:00</div>
-      <div class="ag-content">
-        <div class="ag-title">Use-Case Deep Dive — Talk by CGC SME</div>
-        <div class="ag-sub">Program Lead + CGC Subject Matter Expert · Real challenge context</div>
-      </div>
-    </div>
-    <div class="ag-row dim">
-      <div class="ag-time">11:00–11:15</div>
-      <div class="ag-content"><div class="ag-title">Break</div></div>
-    </div>
-    <div class="ag-row highlight">
-      <div class="ag-time">11:15–12:15</div>
-      <div class="ag-content">
-        <div class="ag-title">⚡ Hackathon Kick-off</div>
-        <div class="ag-sub">Final briefing on rules & judging · Hacking officially begins!</div>
+        <div class="ag-title">Microsoft Briefing — What's New in Copilot &amp; Becoming a Frontier Firm</div>
+        <div class="ag-sub"><em>Microsoft Mentor</em></div>
       </div>
     </div>
     <div class="ag-row highlight">
-      <div class="ag-time">12:15–14:00</div>
+      <div class="ag-time">10:30–11:00</div>
       <div class="ag-content">
-        <div class="ag-title">⚡ Hack Sprint — Build Phase</div>
-        <div class="ag-sub">All Teams + Mentors · Develop AI agent prototypes · Mentors roam for support</div>
+        <div class="ag-title">⚡ Agent-Thon Kick-off</div>
+        <div class="ag-sub"><em>Use Cases, Rules &amp; Judging Briefing</em></div>
+      </div>
+    </div>
+    <div class="ag-row highlight">
+      <div class="ag-time">11:00–13:00</div>
+      <div class="ag-content">
+        <div class="ag-title">⚡ Agent Sprint (Build)</div>
+        <div class="ag-sub"><em>Team Development of AI Agent Prototypes</em></div>
       </div>
     </div>
     <div class="ag-row dim">
-      <div class="ag-time">14:00–14:30</div>
+      <div class="ag-time">13:00–14:00</div>
       <div class="ag-content"><div class="ag-title">Lunch Break</div></div>
+    </div>
+    <div class="ag-row highlight">
+      <div class="ag-time">14:00–14:30</div>
+      <div class="ag-content">
+        <div class="ag-title">⚡ Agent Sprint (Build) — Continued</div>
+      </div>
     </div>
     <div class="ag-row">
       <div class="ag-time">14:30–15:00</div>
       <div class="ag-content">
-        <div class="ag-title">Pre-Demo Readiness Check</div>
-        <div class="ag-sub">Tech Lead + Volunteers · All team demos verified and live</div>
+        <div class="ag-title">Pre-Demo Checks</div>
+        <div class="ag-sub"><em>Final Refinement &amp; Demo Preparation</em></div>
       </div>
     </div>
     <div class="ag-row">
       <div class="ag-time">15:00–16:00</div>
       <div class="ag-content">
-        <div class="ag-title">Team Presentations — 8 Teams × 7 Minutes</div>
-        <div class="ag-sub">Judging Lead (facilitator) · Judges evaluate via score sheets · Strict timekeeping</div>
+        <div class="ag-title">Team Presentations (8 × 7 min)</div>
+        <div class="ag-sub"><em>Demo Showcase to Judges</em></div>
       </div>
     </div>
     <div class="ag-row">
       <div class="ag-time">16:00–16:30</div>
       <div class="ag-content">
-        <div class="ag-title">Judges Deliberation & Scoring Collation</div>
-        <div class="ag-sub">Judging Panel · Final rankings decided · Independent audit for fairness</div>
+        <div class="ag-title">Judges' Deliberation</div>
+        <div class="ag-sub"><em>Scoring &amp; Finalisation</em></div>
       </div>
     </div>
     <div class="ag-row" style="border-bottom:none">
       <div class="ag-time">16:30–17:00</div>
       <div class="ag-content">
-        <div class="ag-title">🏆 Awards Ceremony & Closing</div>
-        <div class="ag-sub">Event Director + COO · Winners announced, prizes presented, group photo</div>
+        <div class="ag-title">🏆 Awards Ceremony &amp; Closing</div>
+        <div class="ag-sub"><em>Winner Announcement, Prize Presentation &amp; Group Photo</em></div>
       </div>
     </div>
   </div>
