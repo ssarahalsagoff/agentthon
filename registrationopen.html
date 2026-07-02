@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Registration Open Now</title>
+  <title>Registration Closed</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@300;400;700;800&display=swap" rel="stylesheet" />
 
@@ -16,7 +16,7 @@
       --surface: #160606;
       --surface-2: #1a0808;
       --text: #f8eaea;
-      --muted: rgba(240, 200, 200, 0.45);
+      --muted: rgba(240, 200, 200, 0.65);
       --border: rgba(255, 26, 26, 0.22);
       --mono: 'Share Tech Mono', monospace;
       --sans: 'Exo 2', sans-serif;
@@ -43,7 +43,6 @@
         linear-gradient(180deg, #120404 0%, #0d0303 100%);
     }
 
-    /* Animated grid */
     .bg-grid {
       position: absolute;
       inset: 0;
@@ -54,7 +53,6 @@
       background-size: 56px 56px;
     }
 
-    /* Scanline sweep */
     .bg-scan {
       position: absolute;
       inset: 0;
@@ -78,10 +76,9 @@
 
     @keyframes scanMove {
       from { transform: translateY(-8%); opacity: 0.6; }
-      to   { transform: translateY(8%); opacity: 1; }
+      to { transform: translateY(8%); opacity: 1; }
     }
 
-    /* Glow vignette */
     .bg-glow {
       position: absolute;
       inset: 0;
@@ -96,10 +93,9 @@
 
     @keyframes glowPulse {
       from { opacity: 0.55; }
-      to   { opacity: 1; }
+      to { opacity: 1; }
     }
 
-    /* Main frame */
     .banner {
       position: relative;
       z-index: 2;
@@ -120,7 +116,6 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding-bottom: 8px;
       background:
         linear-gradient(180deg, rgba(255, 26, 26, 0.04), rgba(255, 26, 26, 0.015)),
         rgba(13, 3, 3, 0.78);
@@ -141,7 +136,6 @@
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--c), transparent);
       box-shadow: 0 0 12px rgba(255, 26, 26, 0.5);
-      opacity: 0.8;
     }
 
     .panel::after {
@@ -157,10 +151,9 @@
 
     @keyframes shimmer {
       from { transform: translateX(-25%); }
-      to   { transform: translateX(25%); }
+      to { transform: translateX(25%); }
     }
 
-    /* Corner accents */
     .corner {
       position: absolute;
       width: 42px;
@@ -176,32 +169,26 @@
     .corner-bl { bottom: 14px; left: 14px; border-width: 0 0 2px 2px; }
     .corner-br { bottom: 14px; right: 14px; border-width: 0 2px 2px 0; }
 
-    /* Eyebrow */
     .eyebrow {
       font-family: var(--mono);
-      font-size: clamp(0.55rem, 1vw, 0.72rem);
-      letter-spacing: 0.32em;
+      font-size: 0.75rem;
+      letter-spacing: 0.35em;
       text-transform: uppercase;
       color: var(--orange);
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       display: flex;
       align-items: center;
       gap: 12px;
-      z-index: 4;
-      text-align: center;
-      animation: rise 0.7s ease both;
     }
 
     .eyebrow::before,
     .eyebrow::after {
       content: "";
-      width: 28px;
+      width: 30px;
       height: 1px;
       background: var(--orange);
-      box-shadow: 0 0 6px var(--orange);
     }
 
-    /* Main blinking headline */
     .headline {
       font-family: var(--sans);
       font-size: clamp(2rem, 5vw, 4.8rem);
@@ -209,140 +196,85 @@
       letter-spacing: 0.12em;
       line-height: 1;
       text-transform: uppercase;
-      color: var(--text);
+      color: #fff;
       text-align: center;
-      position: relative;
-      z-index: 4;
-      animation: rise 0.8s 0.15s ease both;
-      padding: 0 20px;
     }
 
-    .headline .accent {
+    .accent {
       color: var(--c);
       text-shadow:
         0 0 8px rgba(255, 26, 26, 0.8),
         0 0 18px rgba(255, 26, 26, 0.65),
         0 0 34px rgba(255, 26, 26, 0.28);
-      animation: blinkGlow 1.15s infinite;
+      animation: blinkGlow 1.2s infinite;
     }
 
-    /* Blinking effect */
     @keyframes blinkGlow {
-      0%, 100% {
-        opacity: 1;
-        text-shadow:
-          0 0 8px rgba(255, 26, 26, 0.95),
-          0 0 18px rgba(255, 26, 26, 0.7),
-          0 0 34px rgba(255, 26, 26, 0.35);
-        filter: brightness(1);
+      0%,100% {
+        opacity:1;
       }
-      15% {
-        opacity: 0.45;
-        text-shadow:
-          0 0 3px rgba(255, 26, 26, 0.4),
-          0 0 8px rgba(255, 26, 26, 0.2);
-        filter: brightness(0.85);
-      }
-      30% {
-        opacity: 1;
-      }
-      45% {
-        opacity: 0.65;
-      }
-      60% {
-        opacity: 1;
-      }
-      75% {
-        opacity: 0.55;
+      50% {
+        opacity:0.55;
       }
     }
 
-    /* Subtext */
     .subtitle {
-      margin-top: 10px;
+      margin-top: 16px;
+      max-width: 900px;
       font-family: var(--mono);
-      font-size: clamp(0.62rem, 1.1vw, 0.82rem);
-      letter-spacing: 0.22em;
+      font-size: clamp(0.65rem, 1vw, 0.9rem);
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--muted);
       text-align: center;
-      z-index: 4;
-      animation: rise 0.8s 0.28s ease both;
-      padding: 0 16px;
+      color: var(--muted);
+      padding: 0 20px;
+      line-height: 1.8;
     }
 
-    @keyframes rise {
-      from {
-        opacity: 0;
-        transform: translateY(14px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Responsive */
-    @media (max-width: 900px) {
-      .banner {
-        height: 260px;
-      }
-
-      .headline {
-        font-size: clamp(1.65rem, 6vw, 3.4rem);
-        letter-spacing: 0.09em;
-      }
-
-      .subtitle {
-        letter-spacing: 0.16em;
-        padding: 0 12px;
-      }
-    }
-
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       .banner {
         height: 280px;
-        padding: 14px;
-      }
-
-      .eyebrow::before,
-      .eyebrow::after {
-        display: none;
       }
 
       .headline {
-        font-size: clamp(1.4rem, 7vw, 2.4rem);
+        font-size: 2rem;
       }
 
       .subtitle {
-        font-size: 0.58rem;
-        letter-spacing: 0.14em;
+        letter-spacing: 0.08em;
       }
     }
   </style>
 </head>
+
 <body>
+
   <div class="bg-grid"></div>
   <div class="bg-scan"></div>
   <div class="bg-glow"></div>
 
   <div class="banner">
     <div class="panel">
+
       <div class="corner corner-tl"></div>
       <div class="corner corner-tr"></div>
       <div class="corner corner-bl"></div>
       <div class="corner corner-br"></div>
 
-      <div class="eyebrow">CGC × Microsoft Agent-Thon 2026</div>
+      <div class="eyebrow">
+        CGC × Microsoft Agent-Thon 2026
+      </div>
 
       <div class="headline">
-        <span class="accent">Registration Open Now</span>
+        <span class="accent">REGISTRATION CLOSED</span>
       </div>
 
       <div class="subtitle">
-        Form your team · Build AI agents · Join the challenge
+        Thank you for the overwhelming response and support. Registration has reached full capacity and is now officially closed.
       </div>
+
     </div>
   </div>
+
 </body>
 </html>
